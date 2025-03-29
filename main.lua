@@ -2,8 +2,10 @@ function love.load()
     anim8 = require 'libraries/anim8' 
 
     sti = require 'libraries/sti' 
-
     gameMap = sti('maps/test.lua')
+
+    camera = require 'libraries/camera' 
+    cam = camera()
 
     -- disable smooth for a scaling pixels (maybe i need that tomorrow)
     love.graphics.setDefaultFilter('nearest', 'nearest')
@@ -71,21 +73,25 @@ function love.update(dt)
 
     player.animations.lleg:update(dt)
     player.animations.rleg:update(dt)
+
+    cam:lookAt(player.x, player.y)
 end
 
 
 function love.draw()
-    love.graphics.draw(background, 0, 0, 0, 1.2, 1.2)
-    gameMap:draw()
-    --player
-    love.graphics.draw(player.spritetorso, player.x, player.y, 0, player.scale_x, player.scale_y, player.origin_x, player.origin_y)
-    love.graphics.draw(player.spritehead, player.x, player.y, 0, player.scale_x, player.scale_y, player.origin_x, player.origin_y)
-    love.graphics.draw(player.spriterarm, player.x, player.y, 0, player.scale_x, player.scale_y, player.origin_x, player.origin_y)
-    love.graphics.draw(player.spritelarm, player.x, player.y, 0, player.scale_x, player.scale_y, player.origin_x, player.origin_y)
---    love.graphics.draw(player.spriterleg, player.x, player.y, 0, player.scale_x, player.scale_y, player.origin_x, player.origin_y)
---    love.graphics.draw(player.spritelleg, player.x, player.y, 0, player.scale_x, player.scale_y, player.origin_x, player.origin_y)
+    cam:attach()
+        love.graphics.draw(background, 0, 0, 0, 1.2, 1.2)
+        gameMap:drawLayer(gameMap.layers["ground"])
+        gameMap:drawLayer(gameMap.layers["decal"])
+        --player
+        love.graphics.draw(player.spritetorso, player.x, player.y, 0, player.scale_x, player.scale_y, player.origin_x, player.origin_y)
+        love.graphics.draw(player.spritehead, player.x, player.y, 0, player.scale_x, player.scale_y, player.origin_x, player.origin_y)
+        love.graphics.draw(player.spriterarm, player.x, player.y, 0, player.scale_x, player.scale_y, player.origin_x, player.origin_y)
+        love.graphics.draw(player.spritelarm, player.x, player.y, 0, player.scale_x, player.scale_y, player.origin_x, player.origin_y)
+    --    love.graphics.draw(player.spriterleg, player.x, player.y, 0, player.scale_x, player.scale_y, player.origin_x, player.origin_y)
+    --    love.graphics.draw(player.spritelleg, player.x, player.y, 0, player.scale_x, player.scale_y, player.origin_x, player.origin_y)
 
-    player.animations.lleg:draw(player.spritesheetlleg, player.x, player.y, 0, player.scale_x, player.scale_y, player.origin_x, player.origin_y)
-    player.animations.rleg:draw(player.spritesheetrleg, player.x, player.y, 0, player.scale_x, player.scale_y, player.origin_x, player.origin_y)
-
+        player.animations.lleg:draw(player.spritesheetlleg, player.x, player.y, 0, player.scale_x, player.scale_y, player.origin_x, player.origin_y)
+        player.animations.rleg:draw(player.spritesheetrleg, player.x, player.y, 0, player.scale_x, player.scale_y, player.origin_x, player.origin_y)
+    cam:detach()
 end
