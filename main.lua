@@ -1,6 +1,10 @@
 function love.load()
     anim8 = require 'libraries/anim8' 
 
+    sti = require 'libraries/sti' 
+
+    gameMap = sti('maps/test.lua')
+
     -- disable smooth for a scaling pixels (maybe i need that tomorrow)
     love.graphics.setDefaultFilter('nearest', 'nearest')
 
@@ -72,6 +76,7 @@ end
 
 function love.draw()
     love.graphics.draw(background, 0, 0, 0, 1.2, 1.2)
+    gameMap:draw()
     --player
     love.graphics.draw(player.spritetorso, player.x, player.y, 0, player.scale_x, player.scale_y, player.origin_x, player.origin_y)
     love.graphics.draw(player.spritehead, player.x, player.y, 0, player.scale_x, player.scale_y, player.origin_x, player.origin_y)
@@ -82,4 +87,5 @@ function love.draw()
 
     player.animations.lleg:draw(player.spritesheetlleg, player.x, player.y, 0, player.scale_x, player.scale_y, player.origin_x, player.origin_y)
     player.animations.rleg:draw(player.spritesheetrleg, player.x, player.y, 0, player.scale_x, player.scale_y, player.origin_x, player.origin_y)
+
 end
