@@ -120,4 +120,8 @@ function love.draw()
         player.animations.lleg:draw(player.spritesheetlleg, player.x, player.y, 0, player.scale_x, player.scale_y, player.origin_x, player.origin_y)
         player.animations.rleg:draw(player.spritesheetrleg, player.x, player.y, 0, player.scale_x, player.scale_y, player.origin_x, player.origin_y)
     cam:detach()
+
+    --HUD
+    love.graphics.print("TraumLand:Arena TEST HUD", 10, 10)
+
 end
