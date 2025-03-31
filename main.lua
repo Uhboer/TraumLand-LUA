@@ -7,6 +7,9 @@ function love.load()
     camera = require 'libraries/camera' 
     cam = camera()
 
+    wf = require 'libraries/windfield'
+    world = wf.newWorld(0, 0)
+
     -- disable smooth for a scaling pixels (maybe i need that tomorrow)
     love.graphics.setDefaultFilter('nearest', 'nearest')
 
