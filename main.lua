@@ -73,6 +73,7 @@ function love.update(dt)
         player.animations.rleg:gotoFrame(1)
     end
 
+    world:update(dt)
 
     player.animations.lleg:update(dt)
     player.animations.rleg:update(dt)
@@ -122,6 +123,9 @@ function love.draw()
 
         player.animations.lleg:draw(player.spritesheetlleg, player.x, player.y, 0, player.scale_x, player.scale_y, player.origin_x, player.origin_y)
         player.animations.rleg:draw(player.spritesheetrleg, player.x, player.y, 0, player.scale_x, player.scale_y, player.origin_x, player.origin_y)
+
+        world:draw()
+        
     cam:detach()
 
     --HUD
