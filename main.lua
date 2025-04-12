@@ -80,17 +80,19 @@ function love.update(dt)
         player.animations.rleg:gotoFrame(1)
     end
 
-    world:update(dt)
 
     player.animations.lleg:update(dt)
     player.animations.rleg:update(dt)
 
     cam:lookAt(player.x, player.y)
 
+    --phys
+    world:update(dt)
+
     player.x = player.collider:getX()
     player.y = player.collider:getY()
 
-    --cam:borders
+    --cam:borders for map
 
     local w = love.graphics.getWidth()
     local h = love.graphics.getHeight()
