@@ -10,7 +10,7 @@ function love.load()
     wf = require 'libraries/windfield'
     world = wf.newWorld(0, 0)
 
-    -- disable smooth for a scaling pixels (maybe i need that tomorrow)
+    -- disable smooth for a scaling pixels (maybe i need it later)
     love.graphics.setDefaultFilter('nearest', 'nearest')
 
     player = {}
@@ -73,17 +73,20 @@ function love.update(dt)
         isMoving = true
     end
 
+    --phys
     player.collider:setLinearVelocity(vx, vy)
 
+
+    --anims
     if isMoving == false then
         player.animations.lleg:gotoFrame(1)
         player.animations.rleg:gotoFrame(1)
     end
 
-
     player.animations.lleg:update(dt)
     player.animations.rleg:update(dt)
 
+    --cam
     cam:lookAt(player.x, player.y)
 
     --phys
