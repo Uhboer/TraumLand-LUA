@@ -20,8 +20,10 @@ function love.load()
     player.scale_y = 1
     player.origin_x, player.origin_y = 32, 32
 
-    player.speed = 5
+    player.speed = 300
 
+    player.collider = world:newBSGRectangleCollider(400, 250, 40, 70, 10)
+    player.collider:setFixedRotation(true)
 
     player.spritetorso = love.graphics.newImage('sprites/humanity/torso.png')
     player.spritehead = love.graphics.newImage('sprites/humanity/head.png')
@@ -46,27 +48,32 @@ end
 function love.update(dt)
     local isMoving = false
 
+    local vx = 0
+    local vy = 0
+
     if love.keyboard.isDown("d") then
-        player.x = player.x + player.speed
+        vx = player.speed
         player.scale_x = 1
         isMoving = true
     end
 
     if love.keyboard.isDown("a") then
-        player.x = player.x - player.speed
+        vx = player.speed * -1
         player.scale_x = -1
         isMoving = true
     end
 
     if love.keyboard.isDown("w") then
-        player.y = player.y - player.speed
+        vy = player.speed * -1
         isMoving = true
     end
 
     if love.keyboard.isDown("s") then
-        player.y = player.y + player.speed
+        vy = player.speed
         isMoving = true
     end
+
+    player.collider:setLinearVelocity(vx, vy)
 
     if isMoving == false then
         player.animations.lleg:gotoFrame(1)
@@ -79,6 +86,9 @@ function love.update(dt)
     player.animations.rleg:update(dt)
 
     cam:lookAt(player.x, player.y)
+
+    player.x = player.collider:getX()
+    player.y = player.collider:getY()
 
     --cam:borders
 
