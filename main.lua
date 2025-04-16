@@ -22,7 +22,7 @@ function love.load()
 
     player.speed = 300
 
-    player.collider = world:newBSGRectangleCollider(400, 250, 40, 70, 10)
+    player.collider = world:newBSGRectangleCollider(400, 200, 40, 70, 10)
     player.collider:setFixedRotation(true)
 
     player.spritetorso = love.graphics.newImage('sprites/humanity/torso.png')
@@ -73,8 +73,6 @@ function love.update(dt)
         isMoving = true
     end
 
-    --phys
-    player.collider:setLinearVelocity(vx, vy)
 
 
     --anims
@@ -90,6 +88,8 @@ function love.update(dt)
     cam:lookAt(player.x, player.y)
 
     --phys
+    player.collider:setLinearVelocity(vx, vy)
+
     world:update(dt)
 
     player.x = player.collider:getX()
