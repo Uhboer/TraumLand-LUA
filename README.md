@@ -1,2 +1,3 @@
 # TraumLand-Arena
-A game about violence and gore. You should fight, warrior.
+
+Okay, Im fucked up doing this and Im going back to Godot
